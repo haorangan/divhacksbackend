@@ -21,8 +21,8 @@ public class DivhacksController {
         return divhacksRepo.findAll();
     }
 
-    @PutMapping( value="/put")
-    public void putOrg(@RequestBody Org org) {
+    @PostMapping(value="/post")
+    public void postOrg(@RequestBody Org org) {
         divhacksRepo.save(org);
     }
 }
