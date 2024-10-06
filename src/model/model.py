@@ -60,7 +60,33 @@ def get_recommendations(item_tags, top_k):
     return results
 
 collection.load()
-recommendations = get_recommendations("Criminal Justice Technology", 5)
+
+def get_tags(array):
+    tags_string = ""
+    index = 0
+
+    for item in array:
+        # Get the ID for the item
+        matching_ids = df.loc[df['Name'] == item, 'id']
+        
+        if index < len(array) - 1:
+            id_value = matching_ids.values[0]
+            # Access the Tags using the ID
+        
+            tags_string += df.loc[df['id'] == id_value, 'Tags'].values[0] + "| "
+        else:
+            id_value = matching_ids.values[0]
+            # Access the Tags using the ID
+        
+            tags_string += df.loc[df['id'] == id_value, 'Tags'].values[0]
+        index = index + 1
+
+    return tags_string
+
+
+array = ["Constellation Foundation", "Bridge Alliance"]
+
+recommendations = get_recommendations(get_tags(array), 5)
 
 results = [None] * 5
 i = 0
